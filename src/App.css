@@ -1,6 +1,31 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+:root {
+  --primary-color: #eaece5;
+  --secondary-color: #b2c2bf;
+  --tertiary-color: #c0ded9;
+  --contrast-color: #3b3a30;
+  background-color: var(--secondary-color);
+  margin: 0;
+  padding: 0;
+  
 }
 
+body{
+  font-family: 'Josefin Sans', cursive;
+}
 
+.flex-parent {
+  display: flex;
+}
 
+.flex-child {
+  flex: 1; 
+}
+
+@media only screen and (max-width: 600px) {
+
+  .flex-parent {
+    flex-wrap: wrap;
+  }
+}

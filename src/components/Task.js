@@ -1,26 +1,18 @@
 import { useState } from 'react'
 import '../css/Task.css'
 
-function Task (props) {
+export const Task = props => {
   const [task, setTask] = useState(props.task)
   const { taskid, project, projectdesc, time } = task
 
-  let interimValue
-  let timerIsRunning
-
   const handleChange = e => {
     e.preventDefault()
-    interimValue = e.target.value
-    if (!timerIsRunning) {
-      setTimeout(() => {
-        setTask({ projectdesc: interimValue })
-      }, 3000)
-    }
+    setTask({ [e.target.id]: e.target.value })
   }
 
   return (
     <form>
-      <label for='project'>Project</label>
+      <label htmlFor='project'>Project</label>
       <input
         id='project'
         type='text'
@@ -29,13 +21,23 @@ function Task (props) {
         onChange={e => handleChange(e)}
       />
 
-      <label for='projectdesc'>Description </label>
-      <input id='projectdesc' type='text' name='name' value={projectdesc} />
+      <label htmlFor='projectdesc'>Description </label>
+      <input
+        id='projectdesc'
+        type='text'
+        name='name'
+        value={projectdesc}
+        onChange={e => handleChange(e)}
+      />
 
-      <label for='time'>Time</label>
-      <input id='time' type='text' name='name' value={time} />
+      <label htmlFor='time'>Time</label>
+      <input
+        id='time'
+        type='text'
+        name='name'
+        value={time}
+        onChange={e => handleChange(e)}
+      />
     </form>
   )
 }
-
-export default Task
