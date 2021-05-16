@@ -8,18 +8,20 @@ input {
 }
 
 form {
-    background-color: var(--tertiary-color);
+    background-color: var(--primary-color);
     padding: 0.5em;
     margin: 0.5em;
     border-radius: 0.25em;
     transition: all 0.5s ease-in-out;
     opacity: 0.75;
     filter: alpha(opacity=85);
+    border: 1px solid black;
     
 }
 
 form:hover {
-    box-shadow: 3px 3px 3px 3px var(--contrast-color);
+    box-shadow: 0 0 3px var(--highlight-color);
     opacity: 1.0;
     filter: alpha(opacity=100);
 }
+
