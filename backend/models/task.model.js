@@ -13,17 +13,7 @@ const taskSchema = new Schema({
     },
     time: {
         type: Number,
-    },
-    startdt: {
-        type: Date,
-    },
-    lastmodified: {
-        type: Date,
-    },
-    active: {
-        type: Boolean,
-    },
-
+    }
 }, {
     timestamps: true,
 })

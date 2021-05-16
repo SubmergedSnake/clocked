@@ -3,7 +3,7 @@ import '../css/Task.css'
 
 export const Task = props => {
   const [task, setTask] = useState(props.task)
-  const { id, project, projectdesc, time } = task
+  const { id, project, taskdesc, time } = task
 
   const handleChange = e => {
     e.preventDefault();
@@ -20,11 +20,11 @@ export const Task = props => {
         onChange={e => handleChange(e)}
       />
 
-      <label htmlFor='projectdesc'>Description </label>
+      <label htmlFor='taskdesc'>Description </label>
       <input
         type='text'
-        className='projectdesc'
-        value={projectdesc}
+        className='taskdesc'
+        value={taskdesc}
         onChange={e => handleChange(e)}
       />
 
