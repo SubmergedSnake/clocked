@@ -1,0 +1,4 @@
+#addBtn {
+    color: var( --highlight-color);
+    border-radius: var( --border-radius);
+}

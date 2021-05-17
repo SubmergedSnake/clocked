@@ -4,6 +4,7 @@
   --secondary-color: #505050;
   --tertiary-color: #FFFFFF;
   --highlight-color: lime;
+  --border-radius: 4px;
   background-color: var(--tertiary-color);
   margin: 0;
   padding: 0;
@@ -18,7 +19,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
 }
 
 .flex-child-1 {
