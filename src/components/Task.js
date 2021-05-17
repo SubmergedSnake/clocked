@@ -3,20 +3,19 @@ import '../css/Task.css'
 
 export const Task = props => {
   const [task, setTask] = useState(props.task)
-  const { id, project, taskdesc, time } = task
 
   const handleChange = e => {
     e.preventDefault();
-    setTask({ [e.target.className]: e.target.value });
+    setTask({...task, [e.target.className]: e.target.value });
   }
 
   return (
-    <form id={id}>
+    <form id={task.id}>
       <label htmlFor='project'>Project</label>
       <input
         type='text'
         className='project'
-        value={project}
+        value={task.project}
         onChange={e => handleChange(e)}
       />
 
@@ -24,7 +23,7 @@ export const Task = props => {
       <input
         type='text'
         className='taskdesc'
-        value={taskdesc}
+        value={task.taskdesc}
         onChange={e => handleChange(e)}
       />
 
@@ -32,9 +31,8 @@ export const Task = props => {
       <input
         type='text'
         className='time'
-        value={time}
+        value={task.time}
         onChange={e => handleChange(e)}
-        disabled
       />
     </form>
   )

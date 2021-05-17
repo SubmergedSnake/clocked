@@ -5,16 +5,12 @@ import loadergif from '../img/preloader1.gif';
 
 export const ActiveTask = props => {
 
-
-
-
   const [task, setTask] = useState(props.task)
   const [taskClock, setRunning] = useState({ isRunning: false });
-  const { id, project, taskdesc, time } = task;
 
   const handleChange = e => {
     e.preventDefault();
-    setTask({ [e.target.className]: e.target.value });
+    setTask({ ...task, [e.target.className]: e.target.value });
   }
 
 
@@ -29,7 +25,7 @@ export const ActiveTask = props => {
 
     <form
       style={{ background: taskClock.isRunning ? 'lightgreen' : '' }}
-      id={id} className="activeTask" onClickCapture={handleToggle}>
+      id={task.id} className="activeTask" onClickCapture={handleToggle}>
 
 
 
@@ -37,7 +33,7 @@ export const ActiveTask = props => {
       <input
         type='text'
         className='project'
-        value={project}
+        value={task.project}
         onChange={e => handleChange(e)}
       />
 
@@ -46,7 +42,7 @@ export const ActiveTask = props => {
       <input
         type='text'
         className='taskdesc'
-        value={taskdesc}
+        value={task.taskdesc}
         onChange={e => handleChange(e)}
       />
 
@@ -54,7 +50,7 @@ export const ActiveTask = props => {
       <input
         type='text'
         className='time'
-        value={time}
+        value={task.time}
         disabled
         style={{ background: taskClock.isRunning ? 'pink' : ''}}
       />
