@@ -6,6 +6,22 @@
     cursor: pointer;
 }
 
+.activating {
+    transition: background-color 0.75s ease;
+    background-color: var(--highlight-color);
+}
+
+.active {
+    transition: background-color 1s ease;
+    background-color: initial;
+}
+
+
+
+
+
+
+
 label {
     font-size: 0.65em;
     margin: 1em 0 1em 0;

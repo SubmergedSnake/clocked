@@ -10,7 +10,7 @@ export const Task = props => {
   }
 
   return (
-    <form id={task.id}>
+    <form id={task.id} onDoubleClick={props.handleDoubleClick}>
       <label htmlFor='project'>Project</label>
       <input
         type='text'

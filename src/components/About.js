@@ -3,7 +3,7 @@ export const About = () => {
 
         <div className="flex-parent">
             <div className="flex-child">
-                <h4>About the Author</h4>
+                <h4>About the App</h4>
 
             </div>
         </div>
