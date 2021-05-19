@@ -10,14 +10,14 @@ export const ActiveTask = props => {
     background: "lime",
   }
 
-  const { id = '', project = '', taskdesc = '', seconds = 0 } = props.task;
+  const { _id = '', project = '', taskdesc = '', seconds = 0 } = props.task;
   const [taskClock, setRunning] = useState({ isRunning: false });
   const timeref = useRef();
 
   {/*Animate upon activating task*/ }
   useEffect(() => {
     document.title = `${project}`;
-    const foo = document.querySelector("#" + CSS.escape(id));
+    const foo = document.querySelector("#" + CSS.escape(_id));
     foo.classList.add('activating');
     setTimeout(() => {
       foo.classList.add('active');
@@ -36,14 +36,18 @@ export const ActiveTask = props => {
     }
   }
 
+  const handleSubmit = (e) => {
+    props.onSave(e);
+  }
+
   return (
 
     <form
+      onSubmit={handleSubmit}
       style={taskClock.isRunning ? runningTaskStyle : {}}
-      id={id} className="activeTask"
+      id={_id} className="activeTask"
       onClick={toggleClock}
     >
-
 
       <label htmlFor='project'>Project</label>
       <input
@@ -63,6 +67,7 @@ export const ActiveTask = props => {
       />
 
       <Clock seconds={seconds} isRunning={taskClock.isRunning} ref={timeref} />
+      <input type="submit" id="savebtn" style={{ border: "none", background: "white", cursor: "pointer", display: "none" }} value="Save" />
 
     </form>
   )

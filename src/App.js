@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { TaskList } from './components/TaskList'
 import { About } from './components/About'
 import { Navbar } from './components/Navbar';
@@ -11,8 +11,11 @@ function App() {
     <div className='App'>
       <Router>
         <Navbar />
-        <Route path="/tasklist" exact component={TaskList} />
-        <Route path="/about" exact component={About} />
+        <Switch>
+          <Redirect exact from="/" to="/tasklist" />
+          <Route path="/tasklist" component={TaskList} />
+          <Route path="/about" exact component={About} />
+        </Switch>
       </Router>
     </div>
   )

@@ -17,11 +17,6 @@
 }
 
 
-
-
-
-
-
 label {
     font-size: 0.65em;
     margin: 1em 0 1em 0;
@@ -45,6 +40,7 @@ form {
     opacity: 0.75;
     filter: alpha(opacity=85);
     border: 1px solid black;
+    text-align:left;
 }
 
 form:hover {

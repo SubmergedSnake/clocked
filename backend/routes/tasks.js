@@ -11,14 +11,9 @@ router.route('/').get((req, res) => {
 
 /*Add a new task*/
 router.route('/add').post((req, res) => {
-    const { project, taskdesc } = req.body;
-    console.log(`In the backend, got project: ${project}, taskdesc: ${taskdesc}`)
-
-
-    const newTask = new Task({ project, taskdesc, time: ''});
-
+    const newTask = new Task({seconds:0, active: true});
     newTask.save()
-        .then(() => res.json('Task added!'))
+        .then((newTask) => res.json(newTask))
         .catch(err => res.status(400).json(`Error ${err}`))
 });
 
@@ -38,15 +33,15 @@ router.route('/:id').delete((req, res) => {
 
 /*Update a task*/
 router.route('/update/:id').post((req, res) => {
-    console.log(`Updating task with following properties: ${JSON.stringify(req.body)}`);
+    console.log(`Updating task with following properties: ${JSON.stringify(req.body)} and request id ${req.params.id}`);
     Task.findById(req.params.id)
         .then(task => {
             task.project = req.body.project;
             task.taskdesc = req.body.taskdesc;
-            task.time = req.body.time;
+            task.seconds = req.body.seconds;
 
             task.save()
-                .then(() => res.json('Excercise updated!'))
+                .then((task) => res.json(task))
                 .catch(err => res.status(400).json('Error: ' + err));
         });
 })

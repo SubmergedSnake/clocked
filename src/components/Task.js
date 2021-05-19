@@ -6,10 +6,10 @@ const prettyMilliseconds = require('pretty-ms');
 
 export const Task = props => {
 
-  const {id, project, taskdesc, seconds} = props.task;
+  const {_id, project, taskdesc, seconds} = props.task;
 
   return (
-    <form id={id} onClick={props.handleClick}>
+    <form id={_id} onClick={props.handleClick}>
       <label htmlFor='project'>Project</label>
       <input
         type='text'
