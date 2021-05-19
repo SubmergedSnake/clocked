@@ -1,33 +1,36 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-export const Time = (props) => {
+export const Time = forwardRef((props, ref) =>{
 
-    const [seconds, setSeconds] = useState(props.time);
-    const [isActive, setIsActive] = useState(props.isRunning);
+    const [time, setTime] = useState(props.time);
+    const [isRunning, setIsRunning] = useState(props.isRunning);
   
-    function toggle() {
-      setIsActive(!isActive);
+    useImperativeHandle(ref, () => ({
+      toggle(){
+      setIsRunning(!isRunning);
+    },
+    getTime(){
+      return time;
     }
   
-    function reset() {
-      setSeconds(0);
-      setIsActive(false);
-    }
-  
+    }));
+
+
     useEffect(() => {
+      console.log('Time Component state updated');
       let interval = null;
-      if (isActive) {
+      if (isRunning) {
         interval = setInterval(() => {
-          setSeconds(seconds => seconds + 1);
+          setTime(seconds => seconds + 1);
         }, 1000);
-      } else if (!isActive && seconds !== 0) {
+      } else if (!isRunning && time !== 0) {
         clearInterval(interval);
       }
       return () => clearInterval(interval);
-    }, [isActive, seconds]);
+    }, [isRunning, time]);
 
 
     return (
-        <span id="time" style={{ float: "right", paddingBottom: "0.3em" }} onClick={toggle}>{seconds}</span>
+        <div className="time" style={{textAlign:"center", fontSize:"2em"}}>{time}</div>
     )
-}
+});

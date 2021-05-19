@@ -17,8 +17,10 @@ export const TaskList = props => {
 
   const activeTask = tasks.find(task => task.active);
 
-  const handleDoubleClick = (e) => {
-    console.log(`In TaskList Component, got click event from ${e.target.id}`);
+  const handleClick = (e) => {
+
+    const targetID = e.target.tagName == 'FORM' ? e.target.id : (e.target.tagName == 'DIV' ? e.target.parentElement.id : '');
+    if (targetID) {
     const newTasks = [...tasks];
 
     {/*Deactivate old task*/ }
@@ -26,34 +28,35 @@ export const TaskList = props => {
     newTasks[index].active = false;
 
     {/*Activate new task*/ }
-    index = newTasks.findIndex(task => task.id === e.target.id);
+    index = newTasks.findIndex(task => task.id === targetID);
     newTasks[index].active = true;
 
     console.log(`Found doubleclicked task at index ${index}`);
 
     setTasks(newTasks);
   }
+}
 
-  return (
-    <div className='flex-parent'>
+return (
+  <div className='flex-parent'>
 
-      {/* Inactive tasks */}
-      <div className='flex-child-1'>
-        {tasks.map(task => {
-          return !task.active && <Task key={task.id} task={task} handleDoubleClick={handleDoubleClick} />
-        })}
-
-
-      </div>
-
-      {/* Active task */}
-      <div className='flex-child-2'>
-        <ActiveTask key={activeTask.id} task={activeTask} />
-      </div>
+    {/* Inactive tasks */}
+    <div className='flex-child-1'>
+      {tasks.map(task => {
+        return !task.active && <Task key={task.id} task={task} handleClick={handleClick} />
+      })}
 
 
     </div>
-  )
+
+    {/* Active task */}
+    <div className='flex-child-2'>
+      <ActiveTask key={activeTask.id} task={activeTask} />
+    </div>
+
+
+  </div>
+)
 
 }
 

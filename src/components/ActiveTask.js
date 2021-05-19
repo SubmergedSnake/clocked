@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../css/Task.css';
 import { Time } from './Time';
 const prettyMilliseconds = require('pretty-ms');
@@ -7,9 +7,13 @@ const prettyMilliseconds = require('pretty-ms');
 
 export const ActiveTask = props => {
 
+  const runningTaskStyle = {
+      background: "lime",
+  }
+
   const [task, setTask] = useState(props.task)
   const [taskClock, setRunning] = useState({ isRunning: false });
-
+  const timeref = useRef();
 
   {/*Animate upon activating task*/ }
   useEffect(() => {
@@ -26,14 +30,23 @@ export const ActiveTask = props => {
     setTask({ ...task, [e.target.className]: e.target.value });
   }
 
+  const toggleClock = (e) => {
+    console.log(`Current time is ${timeref.current.getTime()}`);
+    if (e.target.tagName == 'FORM' || e.target.className == 'time') {
+      setTask({...task, time: timeref.current.getTime()});
+      setRunning({ isRunning: !taskClock.isRunning });
+      timeref.current.toggle();
+    }
+  }
+
   return (
 
     <form
-      style={{ background: taskClock.isRunning ? 'lightgreen' : '' }}
-      id={task.id} className="activeTask" 
+      style={taskClock.isRunning ? runningTaskStyle : {}}
+      id={task.id} className="activeTask"
+      onClick={toggleClock}
     >
 
-      <Time time={task.time} isRunning={taskClock.isRunning}/>
 
       <label htmlFor='project'>Project</label>
       <input
@@ -52,6 +65,7 @@ export const ActiveTask = props => {
         onChange={e => handleChange(e)}
       />
 
+      <Time time={task.time} isRunning={taskClock.isRunning} ref={timeref} />
 
     </form>
   )

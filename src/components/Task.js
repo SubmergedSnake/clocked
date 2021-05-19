@@ -6,11 +6,11 @@ export const Task = props => {
 
   const handleChange = e => {
     e.preventDefault();
-    setTask({...task, [e.target.className]: e.target.value });
+    setTask({ ...task, [e.target.className]: e.target.value });
   }
 
   return (
-    <form id={task.id} onDoubleClick={props.handleDoubleClick}>
+    <form id={task.id} onClick={props.handleClick}>
       <label htmlFor='project'>Project</label>
       <input
         type='text'
@@ -27,13 +27,8 @@ export const Task = props => {
         onChange={e => handleChange(e)}
       />
 
-      <label htmlFor='time'>Time</label>
-      <input
-        type='text'
-        className='time'
-        value={task.time}
-        onChange={e => handleChange(e)}
-      />
+      <div className="time" style={{ textAlign: "center", fontSize: "2em" }}>{task.time}</div>
+
     </form>
   )
 }
