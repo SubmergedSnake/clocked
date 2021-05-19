@@ -1,33 +1,31 @@
 import { useState } from 'react'
 import '../css/Task.css'
+const prettyMilliseconds = require('pretty-ms');
+
+
 
 export const Task = props => {
-  const [task, setTask] = useState(props.task)
 
-  const handleChange = e => {
-    e.preventDefault();
-    setTask({ ...task, [e.target.className]: e.target.value });
-  }
+  const {id, project, taskdesc, seconds} = props.task;
 
   return (
-    <form id={task.id} onClick={props.handleClick}>
+    <form id={id} onClick={props.handleClick}>
       <label htmlFor='project'>Project</label>
       <input
         type='text'
         className='project'
-        value={task.project}
-        onChange={e => handleChange(e)}
+        value={project}
+        onChange={e => props.handleChange(e)}
       />
 
       <label htmlFor='taskdesc'>Description </label>
       <input
         type='text'
         className='taskdesc'
-        value={task.taskdesc}
-        onChange={e => handleChange(e)}
+        value={taskdesc}
+        onChange={e => props.handleChange(e)}
       />
-
-      <div className="time" style={{ textAlign: "center", fontSize: "2em" }}>{task.time}</div>
+ <div className="time" style={{textAlign:"center", fontSize:"2em"}}>{prettyMilliseconds(seconds * 1000)}</div>
 
     </form>
   )

@@ -9,7 +9,6 @@ export const Navbar = props => {
     <nav>
       <Link to="/tasklist" className="navlink"  >Tasks</Link>
       <Link to="/about" className="navlink">About</Link>
-      <button id="addBtn" title="Add new task...">+</button>
     </nav>
   )
 

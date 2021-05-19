@@ -17,7 +17,6 @@
 
 .flex-parent {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -26,6 +25,7 @@
 }
 
 .flex-child-2 {
+  margin-top: 30vh;
   flex: 2;
 }
 

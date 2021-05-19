@@ -12,4 +12,5 @@ a:hover{
 
 nav {
     background:var(--secondary-color);
+    padding:1em;
 }

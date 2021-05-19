@@ -1,40 +1,37 @@
 import { useState, useEffect, useRef } from 'react';
 import '../css/Task.css';
-import { Time } from './Time';
-const prettyMilliseconds = require('pretty-ms');
+import { Clock } from './Clock';
 
 
 
 export const ActiveTask = props => {
 
   const runningTaskStyle = {
-      background: "lime",
+    background: "lime",
   }
 
-  const [task, setTask] = useState(props.task)
+  const { id = '', project = '', taskdesc = '', seconds = 0 } = props.task;
   const [taskClock, setRunning] = useState({ isRunning: false });
   const timeref = useRef();
 
   {/*Animate upon activating task*/ }
   useEffect(() => {
-    const foo = document.querySelector("#" + CSS.escape(task.id));
+    document.title = `${project}`;
+    const foo = document.querySelector("#" + CSS.escape(id));
     foo.classList.add('activating');
     setTimeout(() => {
       foo.classList.add('active');
     }, 250);
-
+    if (project === '') {
+      document.querySelector('.activeTask input.project').focus();
+    }
   });
 
-  const handleChange = e => {
-    e.preventDefault();
-    setTask({ ...task, [e.target.className]: e.target.value });
-  }
-
   const toggleClock = (e) => {
-    console.log(`Current time is ${timeref.current.getTime()}`);
     if (e.target.tagName == 'FORM' || e.target.className == 'time') {
-      setTask({...task, time: timeref.current.getTime()});
+      const currentTime = timeref.current.getTime();
       setRunning({ isRunning: !taskClock.isRunning });
+      props.handleChange(e, currentTime);
       timeref.current.toggle();
     }
   }
@@ -43,7 +40,7 @@ export const ActiveTask = props => {
 
     <form
       style={taskClock.isRunning ? runningTaskStyle : {}}
-      id={task.id} className="activeTask"
+      id={id} className="activeTask"
       onClick={toggleClock}
     >
 
@@ -52,8 +49,8 @@ export const ActiveTask = props => {
       <input
         type='text'
         className='project'
-        value={task.project}
-        onChange={e => handleChange(e)}
+        value={project}
+        onChange={e => props.handleChange(e)}
       />
 
 
@@ -61,11 +58,11 @@ export const ActiveTask = props => {
       <input
         type='text'
         className='taskdesc'
-        value={task.taskdesc}
-        onChange={e => handleChange(e)}
+        value={taskdesc}
+        onChange={e => props.handleChange(e)}
       />
 
-      <Time time={task.time} isRunning={taskClock.isRunning} ref={timeref} />
+      <Clock seconds={seconds} isRunning={taskClock.isRunning} ref={timeref} />
 
     </form>
   )

@@ -1,0 +1,14 @@
+#newTask {
+border:none;
+background:var(--tertiary-color);
+cursor:pointer;
+}
+
+#newTask:hover {
+    text-decoration: underline;
+}
+
+#activeTaskContainer {
+    position: sticky;
+    top:25%;
+}
