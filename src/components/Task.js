@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import '../css/Task.css'
 const prettyMilliseconds = require('pretty-ms');
 
@@ -15,7 +14,7 @@ export const Task = props => {
         type='text'
         className='project'
         value={project}
-        onChange={e => props.handleChange(e)}
+        disabled
       />
 
       <label htmlFor='taskdesc'>Description </label>
@@ -23,7 +22,7 @@ export const Task = props => {
         type='text'
         className='taskdesc'
         value={taskdesc}
-        onChange={e => props.handleChange(e)}
+        disabled
       />
  <div className="time" style={{textAlign:"center", fontSize:"2em"}}>{prettyMilliseconds(seconds * 1000)}</div>
 
